@@ -1,0 +1,69 @@
+
+.blog-form{
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+    background: #e0e0fc;
+    padding: 30px;
+    flex-direction:column;
+}
+.drag-area{
+    height: 400px;
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+.drag-area div ,span{
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.drag-area .icon{
+    font-size: 50px;
+    color: #1683ff;
+}
+.blog-form label{
+    height: 3vh;
+}
+.blog-form input{
+    height: 10vh;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.hover-button{
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 4px;
+}
+.drag-area-img{
+    width: 100%;
+    height: 400px;
+}
+.blog-submit-button{
+    padding: 10px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: orange;
+    margin-top: 50px;
+}
+.button-delete{
+    margin: auto;
+}
+.blog-delete-button{
+    padding: 10px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: orange;
+    margin-top: 50px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -1,0 +1,55 @@
+.register-box{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    background: rgb(255, 255, 255,0.55);
+    align-items: center;
+    justify-content: center;
+}
+.register-main{
+    display: flex;
+    height: 70%;
+    width: 50vh;
+    background-color: #fff;
+    box-shadow: 10px 5px 10px black;
+    flex-direction: column;
+    gap: 2rem;
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    /* justify-content: space-between; */
+}
+.register-img{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    max-width: 100px;
+}
+.register-form button{
+    margin: auto;
+    margin-top: 10px;
+    padding: 8px;
+    background: #fb641b;
+    border-radius: 10px;
+}
+button:hover{
+    cursor: pointer;
+}
+.register-form p{
+    align-self: center;
+    margin: auto;
+}
+.register-form input{
+    padding: 10px;
+    width: 80%;
+    align-self: center;
+}
+.register-form label{
+    padding: 8px;
+    width: 80%;
+    align-self: center;
+}

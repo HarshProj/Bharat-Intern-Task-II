@@ -9,6 +9,7 @@ import{
   Route,
   Routes
 } from'react-router-dom'
+import { Updateblog } from './Components/Updateblog';
 function App() {
   return (
     <Router>
@@ -23,6 +24,9 @@ function App() {
     </Routes>
     <Routes>
       <Route path='/createblog' element={<Blog/>}/>
+    </Routes>
+    <Routes>
+      <Route path='/updatepost/:id' element={<Updateblog/>}/>
     </Routes>
     </Router>
   );

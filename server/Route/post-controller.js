@@ -4,6 +4,12 @@ const router=express.Router();
 const {body,validationResult}=require('express-validator');
 const Post=require('../Model/Post')
 const User=require('../Model/User')
+
+
+
+
+
+
 router.post("/createpost",userverification,[
     body('title', "Enter a valid title").isLength({ min: 3 }),
     body('description', "Description must be atleast 5 letters ").isLength({min:5}),
@@ -16,7 +22,7 @@ router.post("/createpost",userverification,[
     //     return res.status(500).json({success,validation,error:"Validation fails"});
     // }
     try {
-        console.log(req.user.user.id);
+        // console.log(req.user.user.id);
         const userinfo=await User.findById(req.user.user.id)
         console.log(userinfo.name);
         const {title,description,picture}=req.body;
@@ -29,6 +35,38 @@ router.post("/createpost",userverification,[
         return res.status(500).send({error:error})
     }
 })
+router.post("/updatepost/:id",userverification,async(req,res)=>{
+    try {
+        const {id}=req.params;
+        const body=req.body;
+        const post=await Post.updateOne({_id:id},body);
+        if(!post){
+            return res.status(400).send(d);
+        }
+        success=true;
+        return res.status(200).send({success,data:body});
+    } catch (error) {
+        return res.status(500).send({error:error})
+        
+    }
+})
+router.get("/getpost/:id",userverification,async(req,res)=>{
+    try {
+        const {id}=req.params;
+        
+        const post=await Post.findOne({_id:id});
+        // console.log("post id",id,post);
+        if(!post){
+            return res.status(400).send(post);
+        }
+        
+        return res.status(200).send({data:post});
+    } catch (error) {
+        return res.status(500).send({error:error})
+        
+    }
+})
+
 router.get("/getpost",userverification,async(req,res)=>{
     try {
         const posts=await Post.find();

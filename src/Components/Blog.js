@@ -2,14 +2,44 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../Css/Blog.css'
 import { useDropzone } from "react-dropzone"
 import { useNavigate } from 'react-router-dom'
+
 export const Blog = () => {
   const[details,setDetails]=useState({picture:"",title:"",description:""
   })
+  const navigation=useNavigate();
+  const [url,setUrl]=useState();
+  const [pic,setPic]=useState("");
+  // const [pic,setPic]=useState();
   const inputRef=useRef(null);
   const history=useNavigate();
+
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      navigation('/createBlog');
+}
+  else{
+    navigation('/')
+  }
+  },[])
+  
+
   const handlesubmit=async(e)=>{
     e.preventDefault();
-    const {picture,title,description}=details;
+    // // setPic(files[0]);
+    console.log(pic);
+    const data = new FormData()
+    data.append("file" , pic)
+    data.append("upload_preset" , "e-comm")
+    data.append("cloud_name" , "dnjtwhe9o")
+    fetch("https://api.cloudinary.com/v1_1/dnjtwhe9o/image/upload",{
+      method: "post",
+      body: data
+    }).then(res => (res.json()))
+    .then(data => setUrl(data.url),console.log(data.url))
+    .catch(err => console.log(err))
+
+    let {picture,title,description}=details;
+    picture=url;
     console.log(picture,title,description);
     try {
       const response= await fetch("http://localhost:5000/api/post/createpost",{
@@ -34,13 +64,19 @@ export const Blog = () => {
       console.log(error)
     }
   }
+
+
+
+
+
+
   const handlechange=(e)=>{
     setDetails({
       ...details,
-      [e.target.name]:e.target.value,
-      picture:files[0].preview
+      [e.target.name]:e.target.value
     })
-    console.log(details);
+
+    // console.log(details);
     // {files!='' && setDetails({
     //   picture:files[0].preview})}}
 
@@ -57,6 +93,7 @@ export const Blog = () => {
           })
         )
       )
+      setPic(acceptedFiles[0]);
     },
   })
   const images = files.map((file) => (
@@ -67,15 +104,23 @@ export const Blog = () => {
       
     </div>
   ))
- 
+  const loadFile = (event) => {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  }
 
-  const handledelete=()=>{
+  const handledelete=(e)=>{
     console.log(files[0].path)
     files.pop();
     history('/createblog')
   }
   const handlefile=(e)=>{
     console.log(e.target.value,inputRef)
+    setUrl(e.target.files[0])
+    console.log(url);
   }
   return (
     <div className='main-blog-cont'>
@@ -84,7 +129,7 @@ export const Blog = () => {
         
         {images!=""? images:<div className="drag-area" {...getRootProps()} >
           <div className="icon">drag here</div>
-          <input type="file" name="" id="" hidden ref={inputRef} onChange={handlefile} {...getInputProps()} />
+          <input type="file" name="" id="" hidden ref={inputRef} {...getInputProps()} />
           <span className="dragger">Drag & Drop</span>
           <span className="dragger">or <span className='hover-button'>Brows</span> </span>
           <span className="supports">JPG,PNG,JPEG</span>

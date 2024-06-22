@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import img from'../Images/diggity-marketing-SB0WARG16HI-unsplash.jpg'
 export const Blogs = (props) => {
   const navigate=useNavigate();
-  const {name,description,title,picture}=props.element;
+  const {name,description,title,picture,_id}=props.element;
   const handleclick=()=>{
-    navigate('/createblog')
+    console.log(props)
+    if(props.name===name){
+      navigate(`/updatepost/${_id}`);
+    }
   }
   
   return (

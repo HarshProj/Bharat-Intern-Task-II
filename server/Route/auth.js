@@ -2,9 +2,10 @@ const express=require('express')
 const User=require("../Model/User");
 const router=express.Router();
 const {body,validationResult}=require('express-validator')
-
+const {jwt1}=require('../keys')
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs');
+const userverification = require('../Middleware/verifyuser');
 const hash="Tasktwo";
 router.post('/createUser',[
     body("name","User name must be unique").isLength({min:3}),
@@ -30,7 +31,7 @@ router.post('/createUser',[
         success=true;
         user=await User.create({
             name:req.body.name,
-            email:req.body.email,
+            email:req.body.email, 
             password:secpass
         })
         const data={
@@ -45,11 +46,21 @@ router.post('/createUser',[
         return res.status(500).send("Some error occured");
     }
 })
-router.post('/login',[
+router.get('/getuser',userverification,async(req,res)=>{
+    const {id}=req.user.user;
+    const user=await User.findOne({_id:id});
+    if(!user){
+        return res.send("User not found")
+    }
+    console.log(user.name);
+    res.status(200).json(user.name);
+})
+router.post('/login/',[
     body("email","Enter a Valid email").isEmail(),
     body("password","Password must contain atleast 5 characters").isLength({min:5}),
 ],async(req,res)=>{
     const error=validationResult(req);
+
     let success=false;
     if(!error){
         return res.status(400).json({success,error:error.array()});
@@ -71,8 +82,8 @@ router.post('/login',[
         }
         success=true;
         const auth=jwt.sign(data,hash);
-        console.log(auth);
-        res.status(200).send({success,auth});
+        const name=user.name;
+        res.status(200).send({success,auth,name});
     } catch(error) {
         console.log(error.message);
         return res.status(500).send("Some error occured");

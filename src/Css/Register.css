@@ -12,6 +12,7 @@
     display: flex;
     height: 70%;
     width: 50vh;
+    border-radius: 15px;
     background-color: #fff;
     box-shadow: 10px 5px 10px black;
     flex-direction: column;

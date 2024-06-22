@@ -6,7 +6,9 @@
 .home-img-box{
     width: 100%;
     height: 50vh;
-
+display: flex;
+align-items: center;
+justify-content: center;
 }
 .home-img-box img{
     height: 100%;
@@ -43,4 +45,11 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+.logout{
+    right: 100px;
+}
+.bl{
+    position: absolute;
+    margin: auto;
 }

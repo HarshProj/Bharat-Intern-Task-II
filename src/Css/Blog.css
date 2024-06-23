@@ -4,12 +4,14 @@
     width: 100%;
     border-radius: 10px;
     background: #e0e0fc;
-    padding: 30px;
+    /* padding: 30px 0px;
+     */
+     gap: 2rem;
     flex-direction:column;
 }
 .drag-area{
     height: 400px;
-    width: 100%;
+    width: 99%;
     display: flex;
     background-color: #fff;
     align-items: center;
@@ -29,9 +31,13 @@
 }
 .blog-form label{
     height: 3vh;
+    width: 98%;
+    margin-left: 10px;
 }
 .blog-form input{
     height: 10vh;
+    width: 98%;
+    margin-left: 10px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -66,4 +72,24 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+.viewblog-img{
+    width: 100%;
+    height: 100%;
+}
+.title-div,.desc-div{
+    width: 98%;
+    margin-left: 10px;
+    padding: 5px;
+}
+.title-div{
+    height: 7vh ;
+}
+.desc-div{
+    font-size: large;
+    background-color: #fff;
+    margin-bottom: 20px;
+    height: 10vh;
+    /* border: 2px solid gray; */
+    border-radius: 10px;
 }

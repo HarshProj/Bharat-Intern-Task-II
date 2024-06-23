@@ -9,6 +9,9 @@ export const Blogs = (props) => {
     if(props.name===name){
       navigate(`/updatepost/${_id}`);
     }
+    else{
+      navigate(`/viewpost/${_id}`)
+    }
   }
   
   return (

@@ -10,6 +10,7 @@ import{
   Routes
 } from'react-router-dom'
 import { Updateblog } from './Components/Updateblog';
+import { View } from './Components/View';
 function App() {
   return (
     <Router>
@@ -27,6 +28,9 @@ function App() {
     </Routes>
     <Routes>
       <Route path='/updatepost/:id' element={<Updateblog/>}/>
+    </Routes>
+    <Routes>
+      <Route path='/viewpost/:id' element={<View/>}/>
     </Routes>
     </Router>
   );

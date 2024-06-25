@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const mongoseuri="mongodb://127.0.0.1:27017/Blog"
+const mongoseuri="mongodb+srv://hharshchauhan1:nlRLirg6k4Kbk66w@blog.uwji5du.mongodb.net/?retryWrites=true&w=majority&appName=Blog"
 
 const mongooseconnect=async()=>{
     mongoose.connect(mongoseuri,{

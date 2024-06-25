@@ -15,7 +15,7 @@ export const Blog = () => {
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
-      navigation('/createBlog');
+      navigation('/createblog');
 }
   else{
     navigation('/')
@@ -27,16 +27,24 @@ export const Blog = () => {
     e.preventDefault();
     // // setPic(files[0]);
     console.log(pic);
-    const data = new FormData()
-    data.append("file" , pic)
+    const data = await new FormData()
+    await data.append("file" , pic)
     data.append("upload_preset" , "e-comm")
     data.append("cloud_name" , "dnjtwhe9o")
-    fetch("https://api.cloudinary.com/v1_1/dnjtwhe9o/image/upload",{
+    const val=await fetch("https://api.cloudinary.com/v1_1/dnjtwhe9o/image/upload",{
       method: "post",
       body: data
-    }).then(res => (res.json()))
-    .then(data => setUrl(data.url),console.log(data.url))
-    .catch(err => console.log(err))
+    })
+    if(!val){
+      console.log("err")
+    }
+    else{
+      setUrl(val.url)
+      console.log(val.url)
+    }
+    // .then(res => (res.json()))
+    // .then(data => )
+    // .catch(err => )
 
     let {picture,title,description}=details;
     picture=url;

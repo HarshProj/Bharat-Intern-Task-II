@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
-const mongoseuri="mongodb+srv://hharshchauhan1:nlRLirg6k4Kbk66w@blog.uwji5du.mongodb.net/?retryWrites=true&w=majority&appName=Blog"
+require('dotenv').config()
+const mongoseuri=process.env.Mongo_url
 
 const mongooseconnect=async()=>{
     mongoose.connect(mongoseuri,{

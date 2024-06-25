@@ -4,6 +4,9 @@ const cors=require('cors');
 const mongooseconnect = require('./db');
 app.use(cors());
 const path = require('path')
+
+require('dotenv').config()
+const port=process.env.Port
 mongooseconnect();
 app.use(express.json())
 app.use(express.urlencoded({
@@ -26,6 +29,6 @@ app.get("*"  ,(req,res)=> {
         }
     )
 })
-app.listen(5000,()=>{
+app.listen(port,()=>{
     console.log("Listening at port 5000")
 })
